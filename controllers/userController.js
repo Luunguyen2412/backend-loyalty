@@ -52,25 +52,32 @@ const loginUser = asyncHandler(async (req, res) => {
 
     //Compare password with hashedPassword
     if (user && (await bcrypt.compare(password, user.password))) {
-        const accessToken = jwt.sign({
-            user: {
-                username: user.username,
-                phone: user.phone,
-                id: user.id
-            }
-        }, process.env.ACCESS_TOKEN, { expiresIn: "1m" })
+        const accessToken = jwt.sign(
+            {
+                user: {
+                    username: user.username,
+                    phone: user.phone,
+                    id: user.id
+                }
+            },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: "15m" })
+
+        // console.log('access_token', accessToken);
 
         res.status(200).json({ accessToken });
     } else {
         res.status(401);
         throw new Error("Phone or Password is not valid !");
     }
+    // res.json({ message: "login user successfull" })
 });
 
 // Current user using
 // GET /api/users/current
 const currentUser = asyncHandler(async (req, res) => {
-    res.status(200).json({ message: "Current the user infomation" });
+    res.json(req.user);
+    // res.status(200).json({ message: "Current the user infomation" });
 });
 
 
