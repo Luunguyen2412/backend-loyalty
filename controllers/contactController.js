@@ -33,7 +33,7 @@ const createContact = asyncHandler(async (req, res) => {  // correct
     const contact = await Contact.create({
         name,
         phone,
-        user_id: req.user.id // to security
+        // user_id: req.user.id // to security
     });
 
     res.status(201).json(contact);
