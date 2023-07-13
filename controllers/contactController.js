@@ -9,6 +9,18 @@ const getContacts = asyncHandler(async (req, res) => {
   res.status(200).json(contacts);
 });
 
+// Find contact
+// GET /api/contacts/:phone
+const findContactByPhone = asyncHandler(async (req, res) => {
+  const contact = await Contact.findById(req.params.phone);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found");
+  }
+
+  res.status(200).json(contact);
+});
+
 // Get contact
 // GET /api/contacts/:id
 const getContact = asyncHandler(async (req, res) => {
@@ -80,4 +92,5 @@ module.exports = {
   createContact,
   updateContact,
   deleteContact,
+  findContactByPhone,
 };

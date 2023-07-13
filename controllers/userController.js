@@ -64,11 +64,18 @@ const loginUser = asyncHandler(async (req, res) => {
       { expiresIn: "15m" }
     );
 
-    // console.log('access_token', accessToken);
-
-    res.status(200).json({ accessToken, isLogIn: true });
+    res.status(200).json({
+      accessToken,
+      isLogIn: true,
+      isError: false,
+      message: "Đăng nhập thành công",
+    });
   } else {
-    res.status(401).json({ isLogIn: false });
+    res.status(401).json({
+      isLogIn: false,
+      isError: true,
+      message: "Đăng nhập không thành công",
+    });
     throw new Error("Phone or Password is not valid !");
   }
   // res.json({ message: "login user successfull" })
