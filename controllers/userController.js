@@ -45,8 +45,11 @@ const loginUser = asyncHandler(async (req, res) => {
   const { phone, password } = req.body;
 
   if (!phone || !password) {
-    res.status(400);
-    throw new Error("All fields are mandatory !");
+    res.status(200).json({
+      isError: true,
+      message: "Vui lòng nhập đầy đủ số điện thoại và mật khẩu",
+    });
+    // throw new Error("All fields are mandatory !");
   }
   const user = await User.findOne({ phone });
 
@@ -74,7 +77,7 @@ const loginUser = asyncHandler(async (req, res) => {
       isError: true,
       message: "Đăng nhập không thành công",
     });
-    throw new Error("Phone or Password is not valid !");
+    // throw new Error("Phone or Password is not valid !");
   }
   // res.json({ message: "login user successfull" })
 });

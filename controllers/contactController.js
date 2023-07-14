@@ -12,7 +12,22 @@ const getContacts = asyncHandler(async (req, res) => {
 // Find contact
 // GET /api/contacts/:phone
 const findContactByPhone = asyncHandler(async (req, res) => {
-  const contact = await Contact.findById(req.params.phone);
+  const { phone } = req.body;
+
+  const contact = await Contact.find({ phone: phone })
+    .then((users) => {
+      if (users.length > 0) {
+        // Users found
+        console.log(users);
+      } else {
+        // No users found
+        console.log("No users found");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   if (!contact) {
     res.status(404);
     throw new Error("Contact not found");
