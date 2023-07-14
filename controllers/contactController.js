@@ -14,7 +14,7 @@ const getContacts = asyncHandler(async (req, res) => {
 const findContactByPhone = asyncHandler(async (req, res) => {
   const { phone } = req.body;
 
-  const contact = await Contact.find({ phone: phone })
+  const contact = await Contact.find({ phone })
     .then((users) => {
       if (users.length > 0) {
         // Users found
