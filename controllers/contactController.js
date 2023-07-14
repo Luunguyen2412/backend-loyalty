@@ -14,7 +14,7 @@ const getContacts = asyncHandler(async (req, res) => {
 const findContactByPhone = asyncHandler(async (req, res) => {
   const { phone } = req.body;
 
-  const contact = await Contact.find({ phone })
+  const contact = await Contact.find({ phone: "0946375999" })
     .then((users) => {
       if (users.length > 0) {
         // Users found
@@ -55,7 +55,7 @@ const getContact = asyncHandler(async (req, res) => {
 const createContact = asyncHandler(async (req, res) => {
   // correct
   console.log("request body: ", req.body);
-  const { name, phone } = req.body;
+  const { name, phone, point, membership = 1 } = req.body;
   if (!name || !phone) {
     res.status(400);
     throw new Error("All fields are mandatory !");
@@ -63,6 +63,8 @@ const createContact = asyncHandler(async (req, res) => {
   const contact = await Contact.create({
     name,
     phone,
+    point,
+    membership,
     // user_id: req.user.id // to security
   });
 
