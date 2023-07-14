@@ -70,7 +70,7 @@ const loginUser = asyncHandler(async (req, res) => {
       message: "Đăng nhập thành công",
     });
   } else {
-    res.status(401).json({
+    res.status(200).json({
       isError: true,
       message: "Đăng nhập không thành công",
     });
