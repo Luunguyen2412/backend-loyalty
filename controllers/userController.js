@@ -8,6 +8,7 @@ const { use } = require("../routes/contactRoutes");
 // POST /api/users/register
 const registerUser = asyncHandler(async (req, res) => {
   const { username, phone, password } = req.body;
+  console.log("1111", req.body);
   if (!username || !phone || !password) {
     res.status(400);
     throw new Error("All fields are mandatory !");
@@ -22,11 +23,18 @@ const registerUser = asyncHandler(async (req, res) => {
   //Hash password
   const hashedPassword = await bcrypt.hash(password, 10);
   console.log("Hashed Password", hashedPassword);
-  const user = await User.create({
+  const newUser = new User({
     username,
     phone,
     password: hashedPassword,
   });
+  // console.log("newUser", await newUser.save());
+  await newUser.save();
+  // const user = await User.create({
+  //   username,
+  //   phone,
+  //   password: hashedPassword,
+  // });
 
   console.log(`User created ${user}`);
   if (user) {
