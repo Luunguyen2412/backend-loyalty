@@ -28,17 +28,21 @@ const registerUser = asyncHandler(async (req, res) => {
     phone,
     password: hashedPassword,
   });
-  // console.log("newUser", await newUser.save());
   await newUser.save();
+
   // const user = await User.create({
   //   username,
   //   phone,
   //   password: hashedPassword,
   // });
 
-  console.log(`User created ${user}`);
-  if (user) {
-    res.status(201).json({ _id: user.id, phone: user.phone });
+  console.log(`User created ${newUser}`);
+  if (newUser) {
+    res.status(201).json({
+      _id: newUser.id,
+      phone: newUser.phone,
+      username: newUser.username,
+    });
   } else {
     res.status(400);
     throw new Error("User data is not valid!");
