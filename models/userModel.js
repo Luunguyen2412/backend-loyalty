@@ -8,12 +8,24 @@ const userSchema = mongoose.Schema(
     },
     phone: {
       type: String,
-      // required: [true, "Please add the user phone number"],
       required: true,
     },
     password: {
       type: String,
       required: true,
+    },
+    position: {
+      type: Number, // 1 - Admin, 2 - Staff, 3 - Customer
+      required: true,
+    },
+    avatar: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
+    gender: {
+      type: Number, // 0 - Unselected, 1 - Male, 2 - Female
     },
   },
   {

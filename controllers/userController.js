@@ -4,10 +4,25 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const { use } = require("../routes/contactRoutes");
 
+// Get all users
+// GET /api/users
+const getListUsers = asyncHandler(async (req, res) => {
+  const listUsers = await User.find();
+  res.status(200).json(listUsers);
+});
+
 // Resgiter a user
 // POST /api/users/register
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, phone, password } = req.body;
+  const {
+    username,
+    phone,
+    password,
+    position = 3,
+    avatar = "https://www.w3schools.com/howto/img_avatar.png",
+    address,
+    gender = 1,
+  } = req.body;
   console.log("1111", req.body);
   if (!username || !phone || !password) {
     res.status(400);
@@ -27,21 +42,24 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     phone,
     password: hashedPassword,
+    position,
+    avatar,
+    address,
+    gender,
   });
   await newUser.save();
 
-  // const user = await User.create({
-  //   username,
-  //   phone,
-  //   password: hashedPassword,
-  // });
-
   console.log(`User created ${newUser}`);
+
   if (newUser) {
     res.status(201).json({
       _id: newUser.id,
       phone: newUser.phone,
       username: newUser.username,
+      position: newUser.position,
+      avatar: newUser.avatar,
+      address: newUser.address,
+      gender: newUser.gender,
     });
   } else {
     res.status(400);
@@ -101,4 +119,4 @@ const currentUser = asyncHandler(async (req, res) => {
   // res.status(200).json({ message: "Current the user infomation" });
 });
 
-module.exports = { registerUser, loginUser, currentUser };
+module.exports = { registerUser, loginUser, currentUser, getListUsers };
