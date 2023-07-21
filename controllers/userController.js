@@ -15,7 +15,7 @@ const getListUsers = asyncHandler(async (req, res) => {
 // GET /api/users/:id
 const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
-  if (!contact) {
+  if (!user) {
     res.status(200).json({
       message: "Không tìm thấy người dùng",
       data: {},
@@ -35,10 +35,12 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     phone,
     password,
-    position = 3,
+    position = 3, // register for customer
     avatar = "https://www.w3schools.com/howto/img_avatar.png",
     address,
     gender = 1,
+    point = 0,
+    membership = 1,
   } = req.body;
   console.log("1111", req.body);
   if (!username || !phone || !password) {
@@ -63,6 +65,8 @@ const registerUser = asyncHandler(async (req, res) => {
     avatar,
     address,
     gender,
+    point,
+    membership,
   });
   await newUser.save();
 
@@ -77,6 +81,8 @@ const registerUser = asyncHandler(async (req, res) => {
       avatar: newUser.avatar,
       address: newUser.address,
       gender: newUser.gender,
+      point: newUser.point,
+      membership: newUser.membership,
     });
   } else {
     res.status(400);

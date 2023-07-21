@@ -43,11 +43,16 @@ const getContact = asyncHandler(async (req, res) => {
 
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
-    res.status(404);
-    throw new Error("Contact not found");
+    res.status(200).json({
+      message: "Không tìm thấy người dùng",
+      data: {},
+    });
   }
 
-  res.status(200).json(contact);
+  res.status(200).json({
+    message: "",
+    data: contact,
+  });
 });
 
 // Create new contact

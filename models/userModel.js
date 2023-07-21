@@ -27,6 +27,12 @@ const userSchema = mongoose.Schema(
     gender: {
       type: Number, // 0 - Unselected, 1 - Male, 2 - Female
     },
+    point: {
+      type: Number,
+    },
+    membership: {
+      type: Number,
+    },
   },
   {
     timestamps: true,
