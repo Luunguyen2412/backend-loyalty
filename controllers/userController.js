@@ -11,6 +11,23 @@ const getListUsers = asyncHandler(async (req, res) => {
   res.status(200).json(listUsers);
 });
 
+// Get user
+// GET /api/users/:id
+const getUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!contact) {
+    res.status(200).json({
+      message: "Không tìm thấy người dùng",
+      data: {},
+    });
+  }
+
+  res.status(200).json({
+    message: "",
+    data: user,
+  });
+});
+
 // Resgiter a user
 // POST /api/users/register
 const registerUser = asyncHandler(async (req, res) => {
@@ -119,4 +136,10 @@ const currentUser = asyncHandler(async (req, res) => {
   // res.status(200).json({ message: "Current the user infomation" });
 });
 
-module.exports = { registerUser, loginUser, currentUser, getListUsers };
+module.exports = {
+  registerUser,
+  loginUser,
+  currentUser,
+  getListUsers,
+  getUser,
+};
