@@ -44,14 +44,12 @@ const registerUser = asyncHandler(async (req, res) => {
   } = req.body;
   console.log("1111", req.body);
   if (!username || !phone || !password) {
-    res.status(400);
-    throw new Error("All fields are mandatory !");
+    res.status(200).json({ message: "Vui lòng nhập đầy đủ thông tin" });
   }
   const userAvailable = await User.findOne({ phone });
 
   if (userAvailable) {
-    res.status(400);
-    throw new Error("User already registered!");
+    res.status(200).json({ message: "Nguời dùng đã được đăng ký trước đó" });
   }
 
   //Hash password
@@ -73,23 +71,25 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log(`User created ${newUser}`);
 
   if (newUser) {
-    res.status(201).json({
-      _id: newUser.id,
-      phone: newUser.phone,
-      username: newUser.username,
-      position: newUser.position,
-      avatar: newUser.avatar,
-      address: newUser.address,
-      gender: newUser.gender,
-      point: newUser.point,
-      membership: newUser.membership,
+    res.status(200).json({
+      message: "Tạo tài khoản thành công",
+      data: {
+        _id: newUser.id,
+        phone: newUser.phone,
+        username: newUser.username,
+        position: newUser.position,
+        avatar: newUser.avatar,
+        address: newUser.address,
+        gender: newUser.gender,
+        point: newUser.point,
+        membership: newUser.membership,
+      },
     });
   } else {
-    res.status(400);
-    throw new Error("User data is not valid!");
+    res
+      .status(200)
+      .json({ message: "Tạo tài khoản không thành công", data: {} });
   }
-
-  res.status(200).json({ message: "Register the user" });
 });
 
 // LOGIN user
@@ -124,11 +124,13 @@ const loginUser = asyncHandler(async (req, res) => {
       accessToken,
       isError: false,
       message: "Đăng nhập thành công",
+      data: user,
     });
   } else {
     res.status(200).json({
       isError: true,
       message: "Đăng nhập không thành công",
+      data: {},
     });
     // throw new Error("Phone or Password is not valid !");
   }
@@ -138,8 +140,10 @@ const loginUser = asyncHandler(async (req, res) => {
 // Current user using
 // GET /api/users/current
 const currentUser = asyncHandler(async (req, res) => {
-  res.json(req.user);
-  // res.status(200).json({ message: "Current the user infomation" });
+  // res.json(req.user);
+  res
+    .status(200)
+    .json({ message: "Current the user infomation", data: req.user });
 });
 
 module.exports = {
