@@ -137,6 +137,23 @@ const loginUser = asyncHandler(async (req, res) => {
   // res.json({ message: "login user successfull" })
 });
 
+// Update User
+// PUT /api/users/:id
+const updateUser = asyncHandler(async (req, res) => {
+  // res.status(200).json({ message: `Update User for ${req.params.id}` });
+
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(200).json({ message: "Không tìm thấy user" });
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(updatedUser);
+});
+
 // Current user using
 // GET /api/users/current
 const currentUser = asyncHandler(async (req, res) => {
@@ -152,4 +169,5 @@ module.exports = {
   currentUser,
   getListUsers,
   getUser,
+  updateUser,
 };
