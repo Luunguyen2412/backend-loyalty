@@ -27,27 +27,28 @@ const getProducts = asyncHandler(async (req, res) => {
 //   });
 // });
 
-// // Create new contact
-// // POST /api/contacts
-// const createContact = asyncHandler(async (req, res) => {
-//   // correct
-//   console.log("request body: ", req.body);
-//   const { name, phone, point, membership = 1 } = req.body;
-//   if (!name || !phone) {
-//     res.status(400);
-//     throw new Error("All fields are mandatory !");
-//   }
-//   const contact = await Contact.create({
-//     name,
-//     phone,
-//     point,
-//     membership,
-//     // user_id: req.user.id // to security
-//   });
+// Create new product
+// POST /api/products
+const createProduct = asyncHandler(async (req, res) => {
+  // correct
+  console.log("request body: ", req.body);
+  const { name, images, detail, category, price, quantity } = req.body;
+  if (!name || !category) {
+    res.status(400);
+    throw new Error("All fields are mandatory !");
+  }
+  const product = await Product.create({
+    name,
+    images,
+    detail,
+    category,
+    price,
+    quantity,
+  });
 
-//   res.status(201).json(contact);
-//   console.log(`create user successfull `);
-// });
+  res.status(201).json(product);
+  console.log(`create product successfull `);
+});
 
 // // Update new contact
 // // PUT /api/contacts/:id
@@ -93,4 +94,5 @@ const getProducts = asyncHandler(async (req, res) => {
 
 module.exports = {
   getProducts,
+  createProduct,
 };
