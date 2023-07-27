@@ -30,7 +30,6 @@ const getProducts = asyncHandler(async (req, res) => {
 // Create new product
 // POST /api/products
 const createProduct = asyncHandler(async (req, res) => {
-  // correct
   console.log("request body: ", req.body);
   const { name, images, detail, category, price, quantity } = req.body;
   if (!name || !category) {
@@ -46,7 +45,7 @@ const createProduct = asyncHandler(async (req, res) => {
     quantity,
   });
 
-  res.status(201).json(product);
+  res.status(200).json(product);
   console.log(`create product successfull `);
 });
 
