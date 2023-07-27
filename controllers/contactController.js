@@ -80,8 +80,6 @@ const createContact = asyncHandler(async (req, res) => {
 // Update new contact
 // PUT /api/contacts/:id
 const updateContact = asyncHandler(async (req, res) => {
-  // res.status(200).json({ message: `Update contact for ${req.params.id}` });
-
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
     res.status(200).json({ message: "Không tìm thấy Contact" });

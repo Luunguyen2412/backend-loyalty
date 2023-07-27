@@ -38,6 +38,7 @@ local.properties
 #
 node_modules/
 yarn-error.log
+.env
 
 # fastlane
 #

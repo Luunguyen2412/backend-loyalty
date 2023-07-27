@@ -132,16 +132,12 @@ const loginUser = asyncHandler(async (req, res) => {
       message: "Đăng nhập không thành công",
       data: {},
     });
-    // throw new Error("Phone or Password is not valid !");
   }
-  // res.json({ message: "login user successfull" })
 });
 
 // Update User
 // PUT /api/users/:id
 const updateUser = asyncHandler(async (req, res) => {
-  // res.status(200).json({ message: `Update User for ${req.params.id}` });
-
   const user = await User.findById(req.params.id);
   if (!user) {
     res.status(200).json({ message: "Không tìm thấy user" });
