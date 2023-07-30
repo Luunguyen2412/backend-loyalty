@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const Schema = mongoose.Schema;
+
 const userSchema = mongoose.Schema(
   {
     username: {
@@ -33,6 +35,18 @@ const userSchema = mongoose.Schema(
     membership: {
       type: Number,
     },
+    cart: [
+      {
+        food: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+        qty: { type: Number, required: true },
+      },
+    ],
+    order: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
   {
     timestamps: true,
