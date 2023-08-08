@@ -35,18 +35,18 @@ const userSchema = mongoose.Schema(
     membership: {
       type: Number,
     },
-    cart: [
-      {
-        food: { type: Schema.Types.ObjectId, ref: "Product", required: true },
-        qty: { type: Number, required: true },
-      },
-    ],
-    order: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Order",
-      },
-    ],
+    // cart: [
+    //   {
+    //     food: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+    //     qty: { type: Number, required: true },
+    //   },
+    // ],
+    // order: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Order",
+    //   },
+    // ],
   },
   {
     timestamps: true,
