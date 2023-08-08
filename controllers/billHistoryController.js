@@ -25,7 +25,7 @@ const createBill = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("All fields are mandatory !");
   }
-  const bill = await bill.create({
+  const bill = await BillHistory.create({
     customerChoose,
     listChoose,
     deliveryOption,
