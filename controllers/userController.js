@@ -151,6 +151,29 @@ const updateUser = asyncHandler(async (req, res) => {
   res.status(200).json(updatedUser);
 });
 
+// Delete user
+// DELETE /api/users/:id
+const deleteUser = asyncHandler(async (req, res) => {
+  // correct
+  console.log("request body delete: ", req.params.id);
+
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("user not found");
+  }
+  // if (contact.user_id.toString() !== req.user.id) {
+  //     res.status(403);
+  //     throw new Error("User don't have permission to update other user contacts");
+  // }
+
+  await User.deleteOne({ _id: req.params.id });
+  res.status(200).json(user);
+
+  console.log(`delete successfull user: ${req.params.id} `);
+});
+
 // Current user using
 // GET /api/users/current
 const currentUser = asyncHandler(async (req, res) => {
@@ -167,4 +190,5 @@ module.exports = {
   getListUsers,
   getUser,
   updateUser,
+  deleteUser,
 };

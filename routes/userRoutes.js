@@ -6,6 +6,7 @@ const {
   getListUsers,
   getUser,
   updateUser,
+  deleteUser,
 } = require("../controllers/userController");
 const validateToken = require("../middleware/validateTokenHandle");
 
@@ -13,7 +14,7 @@ const router = express.Router();
 
 router.route("/").get(getListUsers);
 
-router.route("/:id").get(getUser).put(updateUser);
+router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 router.post("/register", registerUser);
 
