@@ -17,7 +17,7 @@ router.get("/:userId", async (req, res) => {
 
   try {
     const billHistory = await getBillHistoryForUser(userId);
-    res.json(billHistory);
+    res.status(200).json(billHistory);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch bill history" });
   }
@@ -28,7 +28,7 @@ router.post("/updatePoints/:userId", async (req, res) => {
 
   try {
     const user = await updatePointsForUser(userId);
-    res.json({ message: "Points updated successfully", user });
+    res.status(200).json({ message: "Points updated successfully", user });
   } catch (error) {
     res.status(500).json({ error: "Failed to update points" });
   }

@@ -14,9 +14,13 @@ const getBills = asyncHandler(async (req, res) => {
 const getBillHistoryForUser = async (userId) => {
   try {
     // Use Mongoose to query the BillHistory collection
-    const billHistory = await BillHistory.find({
-      user: "64b1124f579b88d18dc244e1",
-    }).exec();
+    // const billHistory = await BillHistory.find({
+    //   user: userId,
+    // }).exec();
+    const billHistory = BillHistory.filter(
+      (bill) => bill.customerChoose._id === userId
+    );
+
     return billHistory;
   } catch (error) {
     // Handle any errors that occur during the query
