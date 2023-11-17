@@ -21,6 +21,8 @@ const getBillHistoryForUser = async (userId) => {
       (bill) => bill.customerChoose._id === userId
     );
 
+    console.log("logggggg", billHistory);
+
     return billHistory;
   } catch (error) {
     // Handle any errors that occur during the query
