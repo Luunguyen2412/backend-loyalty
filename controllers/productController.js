@@ -74,9 +74,9 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
   const product = await Product.findById(req.params.id);
 
-  if (!contact) {
+  if (!product) {
     res.status(404);
-    throw new Error("Contact not found");
+    throw new Error("Product not found");
   }
   // if (contact.user_id.toString() !== req.user.id) {
   //     res.status(403);
