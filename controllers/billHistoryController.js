@@ -122,6 +122,6 @@ async function updatePoints(userId, pointsToAdd) {
 module.exports = {
   getBills,
   createBill,
-  updatePointsForUser,
+  // updatePointsForUser,
   getBillHistoryForUser,
 };

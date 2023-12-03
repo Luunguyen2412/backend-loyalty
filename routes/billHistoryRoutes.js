@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getBills,
   createBill,
-  updatePointsForUser,
+  // updatePointsForUser,
   getBillHistoryForUser,
 } = require("../controllers/billHistoryController");
 
