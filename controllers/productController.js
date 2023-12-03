@@ -49,49 +49,49 @@ const createProduct = asyncHandler(async (req, res) => {
   console.log(`create product successfull `);
 });
 
-// // Update new contact
-// // PUT /api/contacts/:id
-// const updateContact = asyncHandler(async (req, res) => {
-//   const contact = await Contact.findById(req.params.id);
-//   if (!contact) {
-//     res.status(200).json({ message: "Không tìm thấy Contact" });
-//   }
+// Update new product
+// PUT /api/products/:id
+const updateProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    res.status(200).json({ message: "Không tìm thấy product" });
+  }
 
-//   const updatedContact = await Contact.findByIdAndUpdate(
-//     req.params.id,
-//     req.body,
-//     { new: true }
-//   );
+  const updatedProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
 
-//   res.status(200).json(updatedContact);
-// });
+  res.status(200).json("Thay đổi thành công", updatedProduct);
+});
 
-// // Delete contact
-// // DELETE /api/contacts/:id
-// const deleteContact = asyncHandler(async (req, res) => {
-//   // correct
-//   console.log("request body delete: ", req.params.id);
+// Delete product
+// DELETE /api/products/:id
+const deleteProduct = asyncHandler(async (req, res) => {
+  // correct
+  console.log("request body delete: ", req.params.id);
 
-//   const contact = await Contact.findById(req.params.id);
+  const product = await Product.findById(req.params.id);
 
-//   if (!contact) {
-//     res.status(404);
-//     throw new Error("Contact not found");
-//   }
-//   // if (contact.user_id.toString() !== req.user.id) {
-//   //     res.status(403);
-//   //     throw new Error("User don't have permission to update other user contacts");
-//   // }
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found");
+  }
+  // if (contact.user_id.toString() !== req.user.id) {
+  //     res.status(403);
+  //     throw new Error("User don't have permission to update other user contacts");
+  // }
 
-//   await Contact.deleteOne({ _id: req.params.id });
-//   res.status(200).json(contact);
-
-//   console.log(`delete successfull user: ${req.params.id} `);
-
-//   // res.status(200).json({ message: `Delete contacts for ${req.params.id}` });
-// });
+  await Product.deleteOne({ _id: req.params.id });
+  res
+    .status(200)
+    .json(`delete successfull product: ${req.params.id} `, product);
+});
 
 module.exports = {
   getProducts,
   createProduct,
+  deleteProduct,
+  updateProduct,
 };

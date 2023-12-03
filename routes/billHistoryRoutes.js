@@ -23,15 +23,15 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-router.post("/updatePoints/:userId", async (req, res) => {
-  const userId = req.params.userId;
+// router.post("/updatePoints/:userId", async (req, res) => {
+//   const userId = req.params.userId;
 
-  try {
-    const user = await updatePointsForUser(userId);
-    res.status(200).json({ message: "Points updated successfully", user });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to update points" });
-  }
-});
+//   try {
+//     const user = await updatePointsForUser(userId);
+//     res.status(200).json({ message: "Points updated successfully", user });
+//   } catch (error) {
+//     res.status(500).json({ error: "Failed to update points" });
+//   }
+// });
 
 module.exports = router;
