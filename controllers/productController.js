@@ -8,25 +8,6 @@ const getProducts = asyncHandler(async (req, res) => {
   res.status(200).json(products);
 });
 
-// // Get contact
-// // GET /api/contacts/:id
-// const getContact = asyncHandler(async (req, res) => {
-//   // correct
-
-//   const contact = await Contact.findById(req.params.id);
-//   if (!contact) {
-//     res.status(200).json({
-//       message: "Không tìm thấy người dùng",
-//       data: {},
-//     });
-//   }
-
-//   res.status(200).json({
-//     message: "",
-//     data: contact,
-//   });
-// });
-
 // Create new product
 // POST /api/products
 const createProduct = asyncHandler(async (req, res) => {
@@ -75,13 +56,8 @@ const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
-    res.status(404);
-    throw new Error("Product not found");
+    res.status(200).json("Không tìm thấy Product");
   }
-  // if (contact.user_id.toString() !== req.user.id) {
-  //     res.status(403);
-  //     throw new Error("User don't have permission to update other user contacts");
-  // }
 
   await Product.deleteOne({ _id: req.params.id });
   res

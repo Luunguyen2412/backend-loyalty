@@ -160,8 +160,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 
   if (!user) {
-    res.status(404);
-    throw new Error("user not found");
+    res.status(200).json("Không tìm thấy User");
   }
   // if (contact.user_id.toString() !== req.user.id) {
   //     res.status(403);
