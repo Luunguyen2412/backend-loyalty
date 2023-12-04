@@ -58,8 +58,7 @@ const createBill = asyncHandler(async (req, res) => {
     totalBill,
   });
 
-  res.status(200).json(bill);
-  console.log(`create bill successfull `);
+  res.status(200).json(`create bill successfull`, bill);
 
   // Update user points after payment is completed
   const pointsToAdd = Math.floor(totalBill / 10000); // Example: 1 point per 10000 spent
@@ -88,40 +87,8 @@ async function updatePoints(userId, pointsToAdd) {
   }
 }
 
-// // Update User Point when Payment succesfully
-// // POST /api/updatePoints/:userId
-// const updatePointsForUser = async (userId) => {
-//   try {
-//     // Get the user and their associated bill histories
-//     const user = await User.findById(userId);
-//     const billHistories = await BillHistory.find({ user: userId });
-
-//     // Calculate total points earned based on the bill histories
-//     let totalPoints = 0;
-//     for (const billHistory of billHistories) {
-//       totalPoints += calculatePointsFromBillHistory(billHistory);
-//     }
-
-//     // Update the user's points
-//     user.point = totalPoints;
-//     await user.save();
-
-//     return user;
-//   } catch (error) {
-//     console.error("Error updating points:", error);
-//     throw error;
-//   }
-// };
-
-// const calculatePointsFromBillHistory = (billHistory) => {
-//   // Customize this function to calculate points based on totalBill
-//   const pointsPerDollar = 0.001; // 1 point for every 10000đ
-//   return billHistory.totalBill * pointsPerDollar;
-// };
-
 module.exports = {
   getBills,
   createBill,
-  // updatePointsForUser,
   getBillHistoryForUser,
 };

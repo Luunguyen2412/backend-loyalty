@@ -182,6 +182,22 @@ const currentUser = asyncHandler(async (req, res) => {
     .json({ message: "Current the user infomation", data: req.user });
 });
 
+// Search user by phone number
+// GET /api/users/
+const searchUser = asyncHandler(async (req, res) => {
+  const filters = req.query;
+  console.log("body", filters);
+  const filteredUsers = User.filter((user) => {
+    let isValid = true;
+    for (key in filters) {
+      // console.log(key, user[key], filters[key]);
+      isValid = isValid && user[key] == filters[key];
+    }
+    return isValid;
+  });
+  res.status(200).json({ filteredUsers });
+});
+
 module.exports = {
   registerUser,
   loginUser,
@@ -190,4 +206,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  searchUser,
 };
