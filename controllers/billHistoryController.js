@@ -1,6 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const BillHistory = require("../models/billHistoryModel");
 const User = require("../models/userModel");
+const axios = require("axios");
+
+// Your code using Axios here
 
 // Get all Bill History
 // GET /api/bills
@@ -87,8 +90,34 @@ async function updatePoints(userId, pointsToAdd) {
   }
 }
 
+const notifyLine = async (req, res) => {
+  const url = "https://notify-api.line.me/api/notify";
+  // const token = "Iyx1K3WOxAfgBRbktBJgdQltXYQzBlCN9gGgALV2KjM";
+  const { message, token } = req.body;
+
+  try {
+    const response = await axios.post(
+      url,
+      `message=${encodeURIComponent(message)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    console.log("Notification sent successfully:", response.data);
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error("Failed to send notification:", error.message);
+    res.status(200).json(error.message);
+  }
+};
+
 module.exports = {
   getBills,
   createBill,
   getBillHistoryForUser,
+  notifyLine,
 };

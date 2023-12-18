@@ -187,7 +187,7 @@ const currentUser = asyncHandler(async (req, res) => {
 const searchUser = asyncHandler(async (req, res) => {
   const filters = req.query;
   console.log("body", filters);
-  const filteredUsers = User.filter((user) => {
+  const filteredUsers = await User.filter((user) => {
     let isValid = true;
     for (key in filters) {
       // console.log(key, user[key], filters[key]);
